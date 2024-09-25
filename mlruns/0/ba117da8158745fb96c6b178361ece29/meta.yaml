@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/learn/mlflow/sharingsession/mlruns/0/ba117da8158745fb96c6b178361ece29/artifacts
+end_time: 1727148479129
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ba117da8158745fb96c6b178361ece29
+run_name: debonair-crow-669
+run_uuid: ba117da8158745fb96c6b178361ece29
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1727148471898
+status: 3
+tags: []
+user_id: User
