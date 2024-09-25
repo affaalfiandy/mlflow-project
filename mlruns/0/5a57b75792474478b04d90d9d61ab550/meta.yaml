@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/learn/mlflow/sharingsession/mlruns/0/5a57b75792474478b04d90d9d61ab550/artifacts
+end_time: 1727149658974
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5a57b75792474478b04d90d9d61ab550
+run_name: abrasive-ox-58
+run_uuid: 5a57b75792474478b04d90d9d61ab550
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1727149653928
+status: 3
+tags: []
+user_id: User
