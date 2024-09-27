@@ -10,7 +10,7 @@ HOST = os.getenv('POSTGRES_HOST')
 PORT = os.getenv('POSTGRES_PORT')
 DATABASE = os.getenv('POSTGRES_DATABASE')
 
-DATABASE_URL = f'postgresql://{USERNAME}:{PASSWORD}@5432:{PORT}/{DATABASE}'
+DATABASE_URL = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}:5432/{DATABASE}'
 engine = create_engine(DATABASE_URL)
 
 def test_connection():
