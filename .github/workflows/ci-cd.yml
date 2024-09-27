@@ -8,24 +8,23 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+      
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.10'
-
+      
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-
+      
       - name: Run tests
         run: |
           python -m unittest test_database.py
-
+      
       - name: Build Docker image
         run: |
           docker build -t sharing-titanic .
@@ -36,18 +35,18 @@ jobs:
     if: success()
     steps:
       - name: List files
-        run: |
-          ls -R
-
+        run: ls -R
+      
       - name: Deploy Dockerfile to EC2
-        uses: appleboy/scp-action@v0.1.3
+        uses: appleboy/scp-action@v0.1.6
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
-          source: "."  # Copy everything in the current directory
-          target: "/"  # Target directory on EC2
-
+          source: "."
+          target: "/home/${{ secrets.EC2_USER }}/"  # Use user directory
+          debug: true  # Enable debug for more info
+      
       - name: SSH commands to deploy
         uses: appleboy/ssh-action@master
         with:
@@ -55,5 +54,6 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            docker build -t sharing-titanic .  # Build the Docker image
+            cd /home/${{ secrets.EC2_USER }}/  # Change to the correct directory
+            docker build -t sharing-titanic .
             docker run -d -p 5000:5000 -p 3000:3000 sharing-titanic
