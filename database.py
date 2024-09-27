@@ -10,7 +10,7 @@ HOST = os.getenv('POSTGRES_HOST')
 PORT = os.getenv('POSTGRES_PORT')
 DATABASE = os.getenv('POSTGRES_DATABASE')
 
-DATABASE_URL = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}'
+DATABASE_URL = f'postgresql://{USERNAME}:{PASSWORD}@{HOST}:5432/{DATABASE}'
 engine = create_engine(DATABASE_URL)
 
 def test_connection():
@@ -40,6 +40,7 @@ def load_data_from_postgres():
     try:
         with engine.connect() as connection:
             df = pd.read_sql(query, connection)
+            # df = df.drop('age', axis=1)
     except Exception as e:
         print(f"Error loading data from PostgreSQL: {e}")
         df = pd.DataFrame()
