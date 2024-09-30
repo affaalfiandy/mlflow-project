@@ -40,7 +40,7 @@ def load_data_from_postgres():
     try:
         with engine.connect() as connection:
             df = pd.read_sql(query, connection)
-            df = df.drop('age', axis=1)
+            # df = df.drop('age', axis=1)
     except Exception as e:
         print(f"Error loading data from PostgreSQL: {e}")
         df = pd.DataFrame()
