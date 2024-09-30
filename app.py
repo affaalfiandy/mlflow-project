@@ -21,7 +21,7 @@ def predict():
     print(input_data)
     # Make prediction
     prediction = model.predict(input_data)
-    response = {'survived prediction: ': int(prediction[0])}
+    response = {'survive prediction: ': int(prediction[0])}
     
     return jsonify(response), 200
 
