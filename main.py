@@ -46,4 +46,5 @@ while True:
     last_length = check_data_length_and_process(last_length)
     write_last_length(length_file_path, last_length)
     # Wait before the next check (e.g., 60 seconds)
-    time.sleep(10800)
+    # time.sleep(10800)
+    time.sleep(30)
