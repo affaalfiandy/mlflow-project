@@ -22,6 +22,12 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run tests
+        env:
+          POSTGRES_USERNAME: ${{ secrets.POSTGRES_USERNAME }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+          POSTGRES_DATABASE: ${{ secrets.POSTGRES_DATABASE }}
         run: |
           python -m unittest test_database.py
 
@@ -56,4 +62,10 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/sharing-titanic:latest
             
             echo "Running the Docker container..."
-            docker run -d -p 5000:5000 -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/sharing-titanic:latest
+            docker run -d -p 5000:5000 -p 3000:3000 \
+              -e POSTGRES_USERNAME=${{ secrets.POSTGRES_USERNAME }} \
+              -e POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
+              -e POSTGRES_HOST=${{ secrets.POSTGRES_HOST }} \
+              -e POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} \
+              -e POSTGRES_DATABASE=${{ secrets.POSTGRES_DATABASE }} \
+              ${{ secrets.DOCKER_USERNAME }}/sharing-titanic:latest
